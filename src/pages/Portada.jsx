@@ -1,8 +1,8 @@
-function Portada() {
+function Portada({ usuario }) {
 const Salir = () => {
     localStorage.removeItem('token');
     window.location.href = '/';
-  }
+  };
 
   //estructura de la portada, con un mensaje de bienvenida y un boton para salir
   return (
@@ -13,7 +13,7 @@ const Salir = () => {
         ✨
       </div>
 
-      <h1>¡Bienvenido!</h1>
+      <h1>¡Bienvenido! {usuario.nombre}!</h1>
 
       <p>
         Has iniciado sesión correctamente.

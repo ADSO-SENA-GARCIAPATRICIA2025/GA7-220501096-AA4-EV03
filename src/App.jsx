@@ -1,9 +1,68 @@
 import "./App.css";
 import { useState } from "react";
-import { BrowserRouter, Routes, Route,useNavigate } from "react-router-dom";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    useNavigate
+} from "react-router-dom";
 
 import Portada from "./pages/Portada.jsx";
 import Users from "./pages/Users.jsx";
+
+
+function Login({
+    ingresar,
+    usuario,
+    password,
+    cambiarUsuario,
+    cambiarPassword,
+    olvidaPassword
+}) {
+
+    return (
+        <div className="container">
+
+            <div className="login-card">
+
+                <div className="logo">
+                    🔐
+                </div>
+
+                <h1>Bienvenido</h1>
+
+                <p>
+                    Inicia sesión para continuar
+                </p>
+
+                <input
+                    type="text"
+                    placeholder="Usuario"
+                    value={usuario}
+                    onChange={cambiarUsuario}
+                />
+
+                <input
+                    type="password"
+                    placeholder="Contraseña"
+                    value={password}
+                    onChange={cambiarPassword}
+                />
+
+                <button onClick={ingresar}>
+                    Ingresar
+                </button>
+
+                <a href="#" onClick={olvidaPassword}>
+                    ¿Olvidaste tu contraseña?
+                </a>
+
+            </div>
+
+        </div>
+    );
+}
+
 
 function App() {
     const [usuario, setUsuario] = useState("");
@@ -50,61 +109,43 @@ function App() {
         }
     }
 
-    if (!mostrarPortada) {
+
         return (
-            <div className="container">
-                <div className="login-card">
+    <BrowserRouter>
 
-                    <div className="logo">🔐</div>
+        <Routes>
 
-                    <h1>Bienvenido</h1>
-
-                    <p>Inicia sesión para continuar</p>
-
-                    <input
-                        type="text"
-                        placeholder="Usuario"
-                        value={usuario}
-                        onChange={cambiarUsuario}
+            <Route
+                path="/login"
+                element={
+                    <Login
+                        ingresar={ingresar}
+                        usuario={usuario}
+                        password={password}
+                        cambiarUsuario={cambiarUsuario}
+                        cambiarPassword={cambiarPassword}
+                        olvidaPassword={olvidaPassword}
                     />
+                }
+            />
 
-                    <input
-                        type="password"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange={cambiarPassword}
-                    />
+            <Route
+                path="/"
+                element={<Portada usuario={usuarioLogueado} />}
+            />
 
-                    <button onClick={ingresar}>
-                        Ingresar
-                    </button>
+            <Route
+                path="/users"
+                element={<Users />}
+            />
 
-                    <a href="#" onClick={olvidaPassword}>
-                        ¿Olvidaste tu contraseña?
-                    </a>
+        </Routes>
 
-                </div>
-            </div>
-        );
-    }
+    </BrowserRouter>
+);
 
-    return (
-        <BrowserRouter>
-            <Routes>
 
-                <Route
-                    path="/"
-                    element={<Portada usuario={usuarioLogueado} />}
-                />
 
-                <Route
-                    path="/users"
-                    element={<Users />}
-                />
-
-            </Routes>
-        </BrowserRouter>
-    );
 }
 
 export default App;

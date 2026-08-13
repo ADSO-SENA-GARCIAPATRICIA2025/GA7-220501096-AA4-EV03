@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 function Users() {
     const [usuarios, setUsuarios] = useState([]);
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [nickname, setNickname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [Nombre, setNombre] = useState('');
+    const [Apellido, setApellido] = useState('');
+    const [Nickname, setNickname] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
     const [IsAdmin, setIsAdmin] = useState(false);
 
     function cambiarNombre(event) {
@@ -38,7 +38,7 @@ function cambiarIsAdmin(event) {
 
     async function crearUsuario() {
 
-    const respuesta = await fetch('http://localhost:3000/users', {
+    const respuesta = await fetch('http://localhost:3000/users',{
         method: 'POST',
 
         headers: {
@@ -46,11 +46,11 @@ function cambiarIsAdmin(event) {
         },
 
         body: JSON.stringify({
-            nombre: nombre,
-            apellido: apellido,
-            nickname: nickname,
-            email: email,
-            password: password,
+            Nombre: Nombre,
+            Apellido: Apellido,
+            Nickname: Nickname,
+            Email: Email,
+            Password: Password,
             IsAdmin: IsAdmin
         })
     });
@@ -84,82 +84,115 @@ function cambiarIsAdmin(event) {
     return (
         <div className="users-container">
 
-            <div className="users-card">
+          <div className="users-card">
 
-                <h1>Gestión de usuarios test </h1>
+    <div className="users-header">
+        <h1>Gestión de usuarios</h1>
 
-                <button className="create-user-button" onClick={() => setMostrarFormulario(true)}>
-                    + Crear usuario
-                </button>
+        <div className="users-actions">
 
-                <button className="create-user-button" 
-                onClick={() => setMostrarFormulario(false)}>
+            <button
+                className="create-user-button"
+                onClick={() => setMostrarFormulario(true)}
+            >
+                + Crear usuario
+            </button>
+
+            {mostrarFormulario && (
+                <button
+                    className="cancel-user-button"
+                    onClick={() => setMostrarFormulario(false)}
+                >
                     Cancelar
                 </button>
-
-                            {mostrarFormulario && (
-             
-
-                    
-                        <div className="create-user">
-
-                        <h2>Crear usuario</h2>
-
-                        <input
-                            type="text"
-                            placeholder="Nombre"
-                            value={nombre}
-                            onChange={cambiarNombre}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Apellido"
-                            value={apellido}
-                            onChange={cambiarApellido}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Nickname"
-                            value={nickname}
-                            onChange={cambiarNickname}
-                        />
-
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={cambiarEmail}
-                        />
-
-                        <input
-                            type="password"
-                            placeholder="Contraseña"
-                            value={password}
-                            onChange={cambiarPassword}
-                        />
-
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={IsAdmin}
-                                onChange={cambiarIsAdmin}
-                            />
-
-                            Administrador
-                        </label>
-                    
-                        <button className="create-user-button" >
-                                                       
-                             + Guardar usuario
-                        </button>
-
-                    </div>
-                    
-
-                
             )}
+
+        </div>
+    </div>
+
+
+    {mostrarFormulario && (
+
+        <div className="create-user">
+
+            <h2>Crear usuario</h2>
+
+            <div className="create-user-form">
+
+                <div className="form-field">
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold' }}>Nombre</label>
+                    <input
+                        type="text"
+                        placeholder="Nombre"
+                        value={Nombre}
+                        onChange={cambiarNombre}
+                    />
+                </div>
+
+                <div className="form-field">
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}          >Apellido</label>
+                    <input
+                        type="text"
+                        placeholder="Apellido"
+                        value={Apellido}
+                        onChange={cambiarApellido}
+                    />
+                </div>
+
+                <div className="form-field">
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  >Nickname</label>
+                    <input
+                        type="text"
+                        placeholder="Nickname"
+                        value={Nickname}
+                        onChange={cambiarNickname}
+                    />
+                </div>
+
+                <div className="form-field">
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}>Email</label>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={Email}
+                        onChange={cambiarEmail}
+                    />
+                </div>
+
+                <div className="form-field">
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  >Contraseña</label>
+                    <input
+                        type="password"
+                        placeholder="Contraseña"
+                        value={Password}
+                        onChange={cambiarPassword}
+                    />
+                </div>
+
+                <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  className="admin-checkbox">
+                    <input
+                        type="checkbox"
+                        checked={IsAdmin}
+                        onChange={cambiarIsAdmin}
+                    />
+
+                    <span>Administrador</span>
+                </label>
+
+            </div>
+
+            <button
+                className="save-user-button"
+                onClick={crearUsuario}
+            >
+                Guardar usuario
+            </button>
+
+        </div>
+
+    )}
+
+
 
 
 
@@ -171,7 +204,7 @@ function cambiarIsAdmin(event) {
                             <div className="user-field">
                                 <span>ID</span>
                                 <strong>{usuario.Id}</strong>
-                            </div>
+                           </div>
 
                             <div className="user-field">
                                 <span>Nombre</span>

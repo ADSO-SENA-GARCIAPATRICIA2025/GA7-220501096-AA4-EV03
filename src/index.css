@@ -137,3 +137,218 @@ code {
   background-color: #5748c7;
   transform: translateY(-1px);
 }
+
+/* ============================= */
+/* HEADER USUARIOS                */
+/* ============================= */
+
+.users-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 30px;
+}
+
+.users-header h1 {
+  margin: 0;
+}
+
+
+/* ============================= */
+/* BOTONES                        */
+/* ============================= */
+
+.users-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.create-user-button,
+.cancel-user-button,
+.save-user-button {
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.create-user-button {
+  background-color: #6c5ce7;
+  color: white;
+}
+
+.create-user-button:hover {
+  background-color: #5748c7;
+  transform: translateY(-1px);
+}
+
+.cancel-user-button {
+  background-color: #eeeeee;
+  color: #444;
+}
+
+.cancel-user-button:hover {
+  background-color: #dddddd;
+}
+
+
+/* ============================= */
+/* CARD CREAR USUARIO             */
+/* ============================= */
+
+.create-user {
+  margin-bottom: 30px;
+  padding: 30px;
+
+  background-color: #f8f8fc;
+
+  border: 1px solid #e5e5ef;
+  border-radius: 16px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.create-user h2 {
+  margin: 0 0 25px;
+
+  color: #333;
+
+  font-size: 22px;
+}
+
+
+/* ============================= */
+/* FORMULARIO                     */
+/* ============================= */
+
+.create-user-form {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.form-field label {
+  color: #666;
+  text-align: start;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-field input {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dcdce5;
+  border-radius: 9px;
+
+  background-color: white;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.form-field input:focus {
+  border-color: #6c5ce7;
+
+  box-shadow:
+    0 0 0 3px rgba(108, 92, 231, 0.12);
+}
+
+
+/* ============================= */
+/* ADMINISTRADOR                  */
+/* ============================= */
+
+.admin-checkbox {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  align-self: end;
+
+  padding: 12px 0;
+
+  color: #444;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.admin-checkbox input {
+  width: 17px;
+  height: 17px;
+
+  accent-color: #6c5ce7;
+
+  cursor: pointer;
+}
+
+
+/* ============================= */
+/* GUARDAR                        */
+/* ============================= */
+
+.save-user-button {
+  margin-top: 25px;
+
+  background-color: #6c5ce7;
+  color: white;
+}
+
+.save-user-button:hover {
+  background-color: #5748c7;
+
+  transform: translateY(-1px);
+}
+
+
+/* ============================= */
+/* RESPONSIVE                     */
+/* ============================= */
+
+@media (max-width: 700px) {
+
+  .users-header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 20px;
+  }
+
+  .users-actions {
+    width: 100%;
+  }
+
+  .users-actions button {
+    flex: 1;
+  }
+
+  .create-user-form {
+    grid-template-columns: 1fr;
+  }
+}

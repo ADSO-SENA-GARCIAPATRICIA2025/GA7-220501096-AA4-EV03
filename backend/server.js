@@ -53,6 +53,20 @@ app.get('/users', (req, res) => {
 
 });
 
+// Configuración de la ruta GET para obtener un usuario por su ID
+app.get('/users/:id', (req, res) => {
+    const sql = 'SELECT * FROM usuarios WHERE Id = ?';
+    db.query(sql, [req.params.id], (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).json({
+                message: 'Error al consultar el usuario'
+            });
+        }
+        res.json(results);
+    });
+});
+
 // Configuración de la ruta POST para crear un nuevo usuario
 app.post('/users', (req, res) => {
 
@@ -153,6 +167,40 @@ app.put('/users/:id', (req, res) => {
 
         res.status(200).json({
             message: 'Usuario actualizado correctamente'
+        });
+    });
+});
+
+// Configuración de la ruta DELETE para eliminar un usuario
+app.delete('/users/:id', (req, res) => {
+
+    const { id } = req.params;
+
+    const sql = `
+        DELETE FROM usuarios
+        WHERE Id = ?
+    `;
+
+    db.query(sql, [id], (error, result) => {
+
+        if (error) {
+
+            console.error(error);
+
+            return res.status(500).json({
+                message: 'Error al eliminar el usuario'
+            });
+        }
+
+        if (result.affectedRows === 0) {
+
+            return res.status(404).json({
+                message: 'Usuario no encontrado'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Usuario eliminado correctamente'
         });
     });
 });

@@ -16,7 +16,7 @@ function Users() {
     const [IsAdmin, setIsAdmin] = useState(false);
     
 
-    
+   
    
 
     function cambiarNombre(event) {
@@ -32,6 +32,11 @@ function editarUsuario(usuario) {
     setPassword(usuario.Password);
     setIsAdmin(usuario.IsAdmin);
 }
+
+function eliminarUsuario(usuario) {
+    console.log("Estás eliminando al usuario:", usuario);
+    }
+
 
 function cambiarApellido(event) {
     setApellido(event.target.value);
@@ -53,6 +58,34 @@ function cambiarIsAdmin(event) {
     setIsAdmin(event.target.checked);
 }
 
+// Función para eliminar un usuario existente
+async function eliminarUsuario(usuario) {
+
+    const respuesta = await fetch(
+        `http://localhost:3000/users/${usuario.Id}`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    const datos = await respuesta.json();
+
+    if (respuesta.ok) {
+
+        alert("Usuario eliminado correctamente");
+
+        window.location.reload();
+
+    } else {
+
+        alert(datos.message);
+
+    }
+}
+
+
+
+// Función para actualizar un usuario existente
 async function actualizarUsuario() {
     const respuesta = await fetch(
         `http://localhost:3000/users/${usuarioEditando.Id}`,
@@ -79,7 +112,7 @@ async function actualizarUsuario() {
     }
 }
 
-
+    // Función para crear un nuevo usuario
     async function crearUsuario() {
 
     const respuesta = await fetch('http://localhost:3000/users',{
@@ -114,6 +147,7 @@ async function actualizarUsuario() {
 
 
     useEffect(() => {
+        // Función para obtener la lista de usuarios desde el backend
         async function obtenerUsuarios() {
             const respuesta = await fetch("http://localhost:3000/users");
             const datos = await respuesta.json();
@@ -163,7 +197,7 @@ async function actualizarUsuario() {
     <div className="create-user">
 
         <h2>Editar usuario</h2>
-        <span>Nombre</span>
+        <span>Nombre *</span>
         <input
             type="text"
             placeholder="Nombre"
@@ -171,7 +205,7 @@ async function actualizarUsuario() {
             onChange={cambiarNombre}
         />
 
-        <span>Apellido</span>
+        <span>Apellido *</span>
         <input
             type="text"
             placeholder="Apellido"
@@ -179,7 +213,7 @@ async function actualizarUsuario() {
             onChange={cambiarApellido}
         />
         <br />
-        <span>Nickname</span> 
+        <span>Nickname *</span> 
         <input
             type="text"
             placeholder="Nickname"
@@ -187,7 +221,7 @@ async function actualizarUsuario() {
             onChange={cambiarNickname}
         />
         
-        <span>Email</span>
+        <span>Email *</span>
         <input
             type="email"
             placeholder="Email"
@@ -195,7 +229,7 @@ async function actualizarUsuario() {
             onChange={cambiarEmail}
         />
             <br />
-        <span>Contraseña</span>
+        <span>Contraseña *</span>
         <input 
             type="password"
             placeholder="Contraseña"
@@ -242,7 +276,7 @@ async function actualizarUsuario() {
             <div className="create-user-form">
 
                 <div className="form-field">
-                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold' }}>Nombre</label>
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold' }}>Nombre *</label>
                     <input
                         type="text"
                         placeholder="Nombre"
@@ -252,7 +286,7 @@ async function actualizarUsuario() {
                 </div>
 
                 <div className="form-field">
-                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}          >Apellido</label>
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}          >Apellido *</label>
                     <input
                         type="text"
                         placeholder="Apellido"
@@ -262,7 +296,7 @@ async function actualizarUsuario() {
                 </div>
 
                 <div className="form-field">
-                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  >Nickname</label>
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  >Nickname *</label>
                     <input
                         type="text"
                         placeholder="Nickname"
@@ -272,7 +306,7 @@ async function actualizarUsuario() {
                 </div>
 
                 <div className="form-field">
-                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}>Email</label>
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}>Email *</label>
                     <input
                         type="email"
                         placeholder="Email"
@@ -282,7 +316,7 @@ async function actualizarUsuario() {
                 </div>
 
                 <div className="form-field">
-                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  >Contraseña</label>
+                    <label style={{ color: '#666', fontSize: '13px', fontWeight: 'bold', textAlign: 'start' }}  >Contraseña *</label>
                     <input
                         type="password"
                         placeholder="Contraseña"
@@ -303,12 +337,12 @@ async function actualizarUsuario() {
 
             </div>
 
-            <button style={{ backgroundColor: '#35e3c6', color: '#444' }}
-                className="save-user-button"
-                 onClick={() => {
-        crearUsuario();
+            <button  style={{ backgroundColor: '#35e3c6', color: '#444' }}
+    className="save-user-button"
+    onClick={async () => {
+        await crearUsuario();
         window.location.reload();
-                }}
+    }}
             >
                 Guardar usuario
             </button>
@@ -373,7 +407,7 @@ async function actualizarUsuario() {
                                 <span>Acciones</span>
                                 <button style={{ backgroundColor: '#f05353', color: '#ffffff' }}
                                 className="create-user-button"
-                                onClick={() => editarUsuario(usuario)}
+                                onClick={() => eliminarUsuario(usuario)}
                             >
                                 Eliminar
                             </button>

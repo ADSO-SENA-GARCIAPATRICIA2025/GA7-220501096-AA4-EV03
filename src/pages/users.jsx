@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 
 
+
 function Users() {
+    
     const [usuarios, setUsuarios] = useState([]);
+
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
     const [usuarioEditando, setUsuarioEditando] = useState(null);
     const [Nombre, setNombre] = useState('');
@@ -11,7 +14,10 @@ function Users() {
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
     const [IsAdmin, setIsAdmin] = useState(false);
+    
 
+    
+   
 
     function cambiarNombre(event) {
     setNombre(event.target.value);
@@ -129,12 +135,14 @@ async function actualizarUsuario() {
 
         <div className="users-actions">
 
-            <button
+            <button 
                 className="create-user-button"
                 onClick={() => setMostrarFormulario(true)}
             >
                 + Crear usuario
             </button>
+            
+           
 
             {mostrarFormulario && (
                 <button
@@ -204,12 +212,22 @@ async function actualizarUsuario() {
 
          <br/>
 
-        <button
+        <div style={{ display: 'flex',gap: '10px' }}>
+
+         <button style={{ backgroundColor: '#dcdce5', color: '#444' }}
+                 className="create-user-button"
+                   onClick={() => window.location.reload()}
+            >
+                ← Volver atrás
+            </button>   
+
+            <button style={{ backgroundColor: '#35e3c6', color: '#444' }}
             className="create-user-button"
             onClick={actualizarUsuario}
         >
             Guardar cambios
         </button>
+        </div>
 
     </div>
 )}
@@ -285,9 +303,12 @@ async function actualizarUsuario() {
 
             </div>
 
-            <button
+            <button style={{ backgroundColor: '#35e3c6', color: '#444' }}
                 className="save-user-button"
-                onClick={crearUsuario}
+                 onClick={() => {
+        crearUsuario();
+        window.location.reload();
+                }}
             >
                 Guardar usuario
             </button>
@@ -339,7 +360,7 @@ async function actualizarUsuario() {
                             <div className="user-field">
                                
                                 <span>Acciones</span>
-                                <button
+                                <button style={{ backgroundColor: '#5360f0', color: '#ffffff' }}
                                 className="create-user-button"
                                 onClick={() => editarUsuario(usuario)}
                             >
@@ -347,6 +368,19 @@ async function actualizarUsuario() {
                             </button>
                                 
                             </div> 
+                            <div className="user-field">
+                               
+                                <span>Acciones</span>
+                                <button style={{ backgroundColor: '#f05353', color: '#ffffff' }}
+                                className="create-user-button"
+                                onClick={() => editarUsuario(usuario)}
+                            >
+                                Eliminar
+                            </button>
+                                
+                            </div> 
+
+                             
 
                                 
                         </div>

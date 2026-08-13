@@ -1,31 +1,49 @@
+import { useNavigate } from "react-router-dom";
+
 function Portada({ usuario }) {
-const Salir = () => {
-    localStorage.removeItem('token');
-    window.location.href = '/';
-  };
 
-  //estructura de la portada, con un mensaje de bienvenida y un boton para salir
-  return (
-  <div className="portada">
-    <div className="portada-card">
+    const navigate = useNavigate();
 
-      <div className="portada-icon">
-        ✨
-      </div>
+    const Salir = () => {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    };
 
-      <h1>¡Bienvenido! {usuario.nombre}!</h1>
+    return (
+        <div className="portada">
+            <div className="portada-card">
 
-      <p>
-        Has iniciado sesión correctamente.
-      </p>
-    
-      <button onClick={Salir}>
-        Salir
-      </button>
+                <div className="portada-icon">
+                    ✨
+                </div>
 
-    </div>
-  </div>
-);
+                <h1>
+                    ¡Bienvenido! {usuario.nombre}!
+                </h1>
+
+                <p>
+                    Has iniciado sesión correctamente.
+                </p>
+
+                <button onClick={() => navigate("/users")}>
+                    Gestionar usuarios
+                </button>
+
+                <span> </span>
+
+                <button
+                    onClick={Salir}
+                    style={{
+                        backgroundColor: "red",
+                        color: "white"
+                    }}
+                >
+                    Salir
+                </button>
+
+            </div>
+        </div>
+    );
 }
 
 export default Portada;

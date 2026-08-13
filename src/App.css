@@ -204,3 +204,123 @@ body {
 .portada-card button:hover {
   background: #5748c7;
 }
+
+/* ============================= */
+/* GESTIÓN DE USUARIOS            */
+/* ============================= */
+
+.users-container {
+  min-height: 100vh;
+  padding: 60px 40px;
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.users-card {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px;
+
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.users-card h1 {
+  margin: 0 0 30px;
+
+  color: #222;
+  font-size: 32px;
+  text-align: center;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.user-row {
+  display: grid;
+
+  grid-template-columns:
+    60px
+    1fr
+    1fr
+    1fr
+    2fr
+    130px;
+
+  align-items: center;
+  gap: 20px;
+
+  padding: 18px 20px;
+
+  background-color: #f8f8fc;
+
+  border: 1px solid #e8e8ef;
+  border-radius: 12px;
+
+  transition: 0.2s;
+}
+
+.user-row:hover {
+  background-color: #f1efff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.user-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-field span {
+  color: #888;
+
+  font-size: 12px;
+  font-weight: normal;
+
+  text-transform: uppercase;
+}
+
+.user-field strong {
+  color: #333;
+  font-size: 15px;
+}
+
+
+/* ============================= */
+/* RESPONSIVE                     */
+/* ============================= */
+
+@media (max-width: 900px) {
+
+  .users-container {
+    padding: 30px 20px;
+  }
+
+  .users-card {
+    padding: 25px;
+  }
+
+  .user-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .users-card h1 {
+    font-size: 26px;
+  }
+
+  .user-row {
+    grid-template-columns: 1fr;
+  }
+}

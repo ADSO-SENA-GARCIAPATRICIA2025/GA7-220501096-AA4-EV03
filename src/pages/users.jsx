@@ -47,6 +47,32 @@ function cambiarIsAdmin(event) {
     setIsAdmin(event.target.checked);
 }
 
+async function actualizarUsuario() {
+    const respuesta = await fetch(
+        `http://localhost:3000/users/${usuarioEditando.Id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                Nombre: Nombre,
+                Apellido: Apellido,
+                Nickname: Nickname,
+                Email: Email,
+                Password: Password,
+                IsAdmin: IsAdmin
+            })
+        }
+    );
+    const datos = await respuesta.json();
+    if (respuesta.ok) {
+        alert("Usuario actualizado correctamente");
+    } else {
+        alert(datos.message);
+    }
+}
+
 
     async function crearUsuario() {
 
@@ -178,7 +204,10 @@ function cambiarIsAdmin(event) {
 
          <br/>
 
-        <button className="create-user-button">
+        <button
+            className="create-user-button"
+            onClick={actualizarUsuario}
+        >
             Guardar cambios
         </button>
 

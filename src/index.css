@@ -109,3 +109,31 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+.create-user-button {
+  padding: 13px 25px;
+
+  border: none;
+  border-radius: 10px;
+
+  background-color: #6c5ce7;
+  color: white;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.create-user-button:hover {
+  background-color: #5748c7;
+  transform: translateY(-1px);
+}
+
+.create-user-button {
+  background-color: #5748c7;
+  transform: translateY(-1px);
+}

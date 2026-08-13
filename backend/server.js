@@ -13,7 +13,7 @@ app.use(express.json());
 app.post('/login', (req, res) => {
     const { nickname, password } = req.body;
     const sql = `
-        SELECT id, nombre, apellido, nickname, email, isAdmin
+        SELECT id, nombre, apellido, nickname, email, IsAdmin
         FROM usuarios
         WHERE nickname = ? AND password = ?
         `;
@@ -49,6 +49,49 @@ app.get('/users', (req, res) => {
         res.json(results);
     });
 
+});
+
+app.post('/users', (req, res) => {
+
+    const {
+        Nombre,
+        Apellido,
+        Nickname,
+        Email,
+        Password,
+        IsAdmin
+    } = req.body;
+
+    const sql = `
+        INSERT INTO usuarios
+        (Nombre, Apellido, Nickname, Email, Password, IsAdmin)
+        VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    const valores = [
+        Nombre,
+        Apellido,
+        Nickname,
+        Email,
+        Password,
+        IsAdmin
+    ];
+
+    db.query(sql, valores, (error, result) => {
+
+        if (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                message: 'Error al crear el usuario'
+            });
+        }
+
+        res.status(201).json({
+            message: 'Usuario creado correctamente',
+            id: result.insertId
+        });
+    });
 });
 // Iniciar el servidor
 app.listen(PORT, () => {

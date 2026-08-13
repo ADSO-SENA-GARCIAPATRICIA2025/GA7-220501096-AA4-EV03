@@ -211,6 +211,7 @@ body {
 
 .users-container {
   min-height: 100vh;
+  
   padding: 60px 40px;
   background-color: rgba(255, 255, 255, 0.35);
 }
@@ -250,7 +251,8 @@ body {
     1fr
     1fr
     2fr
-    130px;
+    130px
+    1fr;
 
   align-items: center;
   gap: 20px;

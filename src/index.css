@@ -352,3 +352,45 @@ code {
     grid-template-columns: 1fr;
   }
 }
+
+.form-field input {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dcdce5;
+  border-radius: 9px;
+
+  background-color: white;
+  color: #623294;  /* ← texto que escribes */
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s;
+}
+
+.user-value {
+  color: #623294;  
+}
+
+input{
+  
+ width: 35%;
+ margin: 10px;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dcdce5;
+  border-radius: 9px;
+
+  background-color: white;
+  color: #623294;  /* ← texto que escribes */
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition: 0.2s;
+}

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function Users() {
     const [usuarios, setUsuarios] = useState([]);
     const [mostrarFormulario, setMostrarFormulario] = useState(false);
+    const [usuarioEditando, setUsuarioEditando] = useState(null);
     const [Nombre, setNombre] = useState('');
     const [Apellido, setApellido] = useState('');
     const [Nickname, setNickname] = useState('');
@@ -11,8 +12,19 @@ function Users() {
     const [Password, setPassword] = useState('');
     const [IsAdmin, setIsAdmin] = useState(false);
 
+
     function cambiarNombre(event) {
     setNombre(event.target.value);
+}
+
+function editarUsuario(usuario) {
+    setUsuarioEditando(usuario);
+      setNombre(usuario.Nombre);
+    setApellido(usuario.Apellido);
+    setNickname(usuario.Nickname);
+    setEmail(usuario.Email);
+    setPassword(usuario.Password);
+    setIsAdmin(usuario.IsAdmin);
 }
 
 function cambiarApellido(event) {
@@ -111,6 +123,69 @@ function cambiarIsAdmin(event) {
     </div>
 
 
+         
+            {usuarioEditando && (
+
+    <div className="create-user">
+
+        <h2>Editar usuario</h2>
+        <span>Nombre</span>
+        <input
+            type="text"
+            placeholder="Nombre"
+            value={Nombre}
+            onChange={cambiarNombre}
+        />
+
+        <span>Apellido</span>
+        <input
+            type="text"
+            placeholder="Apellido"
+            value={Apellido}
+            onChange={cambiarApellido}
+        />
+        <br />
+        <span>Nickname</span> 
+        <input
+            type="text"
+            placeholder="Nickname"
+            value={Nickname}
+            onChange={cambiarNickname}
+        />
+        
+        <span>Email</span>
+        <input
+            type="email"
+            placeholder="Email"
+            value={Email}
+            onChange={cambiarEmail}
+        />
+            <br />
+        <span>Contraseña</span>
+        <input 
+            type="password"
+            placeholder="Contraseña"
+            value={Password}
+            onChange={cambiarPassword}
+        />
+
+        <span>Administrador</span>
+            <input style={{ width: '10%' }}
+                type="checkbox"
+                checked={IsAdmin}
+                onChange={cambiarIsAdmin}
+            />
+
+         <br/>
+
+        <button className="create-user-button">
+            Guardar cambios
+        </button>
+
+    </div>
+)}
+
+  
     {mostrarFormulario && (
 
         <div className="create-user">
@@ -203,36 +278,48 @@ function cambiarIsAdmin(event) {
 
                             <div className="user-field">
                                 <span>ID</span>
-                                <strong>{usuario.Id}</strong>
+                                <div className="user-value">{usuario.Id}</div>
                            </div>
 
                             <div className="user-field">
                                 <span>Nombre</span>
-                                <strong>{usuario.Nombre}</strong>
+                                <div className="user-value">{usuario.Nombre}</div>
                             </div>
 
                             <div className="user-field">
                                 <span>Apellido</span>
-                                <strong>{usuario.Apellido}</strong>
+                                <div className="user-value">{usuario.Apellido}</div>
                             </div>
 
                             <div className="user-field">
                                 <span>Nickname</span>
-                                <strong>{usuario.Nickname}</strong>
+                                <div className="user-value">{usuario.Nickname}</div>
                             </div>
 
                             <div className="user-field">
                                 <span>Email</span>
-                                <strong>{usuario.Email}</strong>
+                                <div className="user-value">{usuario.Email}</div>
                             </div>
 
                             <div className="user-field">
                                 <span>Administrador</span>
-                                <strong>
+                                <div className="user-value">
                                     {usuario.IsAdmin ? "Sí" : "No"}
-                                </strong>
+                                </div>
+                            </div> 
+                            <div className="user-field">
+                               
+                                <span>Acciones</span>
+                                <button
+                                className="create-user-button"
+                                onClick={() => editarUsuario(usuario)}
+                            >
+                                Editar
+                            </button>
+                                
                             </div> 
 
+                                
                         </div>
                     ))}
 

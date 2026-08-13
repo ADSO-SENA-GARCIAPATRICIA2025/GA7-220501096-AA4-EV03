@@ -115,6 +115,61 @@ async function actualizarUsuario() {
     // Función para crear un nuevo usuario
     async function crearUsuario() {
 
+       // VALIDAR CAMPOS VACÍOS
+    if (
+        !Nombre.trim() ||
+        !Apellido.trim() ||
+        !Nickname.trim() ||
+        !Email.trim() ||
+        !Password.trim()
+    ) {
+        alert("Todos los campos son obligatorios");
+        return false;
+        
+    }
+        console.log("crearUsuario se ejecutó");
+
+    // VALIDAR NOMBRE
+    const nombreValido = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$/;
+
+    if (!nombreValido.test(Nombre.trim())) {
+        alert("El nombre solo puede contener letras");
+        return false;
+    }
+
+
+    // VALIDAR APELLIDO
+    if (!nombreValido.test(Apellido.trim())) {
+        alert("El apellido solo puede contener letras");
+        return false;
+    }
+
+
+    // VALIDAR NICKNAME
+    if (Nickname.includes(" ")) {
+        alert("El nickname no puede contener espacios");
+        return false;
+    }
+
+
+    // VALIDAR EMAIL
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailValido.test(Email.trim())) {
+        alert("Introduce un email válido");
+        return false;
+    }
+
+
+    // VALIDAR CONTRASEÑA
+    if (Password.length < 4) {
+        alert("La contraseña debe tener al menos 4 caracteres");
+        return false;
+    }
+
+
+    // SI TODAS LAS VALIDACIONES SON CORRECTAS
+
     const respuesta = await fetch('http://localhost:3000/users',{
         method: 'POST',
 
@@ -141,6 +196,7 @@ async function actualizarUsuario() {
     } else {
 
         alert(datos.message);
+        return false;
     }
 }
 
@@ -337,11 +393,16 @@ async function actualizarUsuario() {
 
             </div>
 
-            <button  style={{ backgroundColor: '#35e3c6', color: '#444' }}
+            <button type="submit" style={{ backgroundColor: '#35e3c6', color: '#444' }}
     className="save-user-button"
-    onClick={async () => {
-        await crearUsuario();
-        window.location.reload();
+     onClick={async () => {
+
+        const creado = await crearUsuario();
+
+        if (creado) {
+            window.location.reload();
+        }
+
     }}
             >
                 Guardar usuario

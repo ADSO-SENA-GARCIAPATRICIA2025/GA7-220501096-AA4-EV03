@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,useNavigate } from "react-router-dom";
 
 import Portada from "./pages/Portada.jsx";
 import Users from "./pages/Users.jsx";
@@ -8,7 +8,7 @@ import Users from "./pages/Users.jsx";
 function App() {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
-    const [mostrarPortada, setMostrarPortada] = useState(false);
+   // const [mostrarPortada, setMostrarPortada] = useState(false);
     const [usuarioLogueado, setUsuarioLogueado] = useState(null);
 
     function cambiarUsuario(event) {
@@ -43,7 +43,7 @@ function App() {
 
         if (respuesta.ok) {
             alert("Inicio de sesión correcto");
-            setMostrarPortada(true);
+            // setMostrarPortada(true);
             cambiarUsuarioLogueado(datos.usuario);
         } else {
             alert(datos.message);
